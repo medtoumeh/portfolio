@@ -1,0 +1,487 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Portfolio - Toumeh Mohamed</title>
+    <style>
+        /* Reset et styles de base */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+        }
+
+        :root {
+            --bg-primary: #f8f5f0;
+            --bg-secondary: #ffffff;
+            --text-primary: #1f1f1f;
+            --text-secondary: #4b5563;
+            --accent-color: #e6dfd3;
+            --shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+        }
+
+        .dark {
+            --bg-primary: #111827;
+            --bg-secondary: #1f2937;
+            --text-primary: #f3f4f6;
+            --text-secondary: #9ca3af;
+            --accent-color: #374151;
+            --shadow: 0 1px 3px rgba(0, 0, 0, 0.3);
+        }
+
+        body {
+            background-color: var(--bg-primary);
+            color: var(--text-primary);
+            line-height: 1.6;
+            transition: background-color 0.3s, color 0.3s;
+        }
+
+        .container {
+            width: 100%;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 1rem;
+        }
+
+        /* Header */
+        header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1.5rem 0;
+        }
+
+        header h1 {
+            font-size: 1.5rem;
+            font-weight: 700;
+        }
+
+        .theme-toggle {
+            background-color: var(--accent-color);
+            border: none;
+            border-radius: 50%;
+            width: 40px;
+            height: 40px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+
+        /* Hero Section */
+        .hero {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 2rem;
+            padding: 3rem 0 5rem;
+        }
+
+        @media (min-width: 768px) {
+            .hero {
+                flex-direction: row;
+                align-items: center;
+                text-align: left;
+            }
+        }
+
+        .profile-image {
+            width: 200px;
+            height: 200px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 4px solid var(--accent-color);
+        }
+
+        .hero-content {
+            text-align: center;
+        }
+
+        @media (min-width: 768px) {
+            .hero-content {
+                text-align: left;
+            }
+        }
+
+        .hero-content h1 {
+            font-size: 2.5rem;
+            margin-bottom: 0.5rem;
+        }
+
+        @media (min-width: 768px) {
+            .hero-content h1 {
+                font-size: 3rem;
+            }
+        }
+
+        .hero-content h2 {
+            font-size: 1.25rem;
+            color: var(--text-secondary);
+            margin-bottom: 1rem;
+        }
+
+        @media (min-width: 768px) {
+            .hero-content h2 {
+                font-size: 1.5rem;
+            }
+        }
+
+        .contact-info {
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+            align-items: center;
+        }
+
+        @media (min-width: 768px) {
+            .contact-info {
+                flex-direction: row;
+                align-items: flex-start;
+            }
+        }
+
+        .contact-item {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .contact-item svg {
+            color: var(--text-secondary);
+        }
+
+        /* Section Styles */
+        section {
+            padding: 2rem 0;
+        }
+
+        .section-header {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .section-header h2 {
+            font-size: 1.5rem;
+        }
+
+        .star-icon {
+            color: #f59e0b;
+            fill: #f59e0b;
+        }
+
+        .card {
+            background-color: var(--bg-secondary);
+            padding: 1.5rem;
+            border-radius: 0.5rem;
+            box-shadow: var(--shadow);
+            margin-bottom: 2rem;
+        }
+
+        .card h3 {
+            font-size: 1.25rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .card p {
+            color: var(--text-secondary);
+            margin-bottom: 0.5rem;
+        }
+
+        .card ul {
+            list-style-position: inside;
+            color: var(--text-primary);
+            margin-top: 0.5rem;
+        }
+
+        .card li {
+            margin-bottom: 0.5rem;
+        }
+
+        /* Skills Grid */
+        .skills-grid {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 1rem;
+        }
+
+        @media (min-width: 640px) {
+            .skills-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+
+        @media (min-width: 768px) {
+            .skills-grid {
+                grid-template-columns: repeat(4, 1fr);
+            }
+        }
+
+        .skill-card {
+            background-color: var(--accent-color);
+            padding: 1rem;
+            border-radius: 0.5rem;
+            text-align: center;
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+
+        .skill-card:hover {
+            transform: translateY(-3px);
+            box-shadow: var(--shadow);
+        }
+
+        /* Languages Grid */
+        .languages-grid {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 1rem;
+        }
+
+        @media (min-width: 640px) {
+            .languages-grid {
+                grid-template-columns: repeat(3, 1fr);
+            }
+        }
+
+        /* Footer */
+        footer {
+            background-color: var(--accent-color);
+            padding: 2rem 0;
+            margin-top: 3rem;
+            text-align: center;
+        }
+
+        footer p {
+            color: var(--text-secondary);
+        }
+
+        .contact-item a {
+            color: var(--text-primary);
+            text-decoration: none;
+        }
+
+        .contact-item a:hover {
+            text-decoration: underline;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>Portfolio</h1>
+            <button class="theme-toggle" aria-label="Toggle dark mode">
+                <svg id="theme-icon" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <circle cx="12" cy="12" r="5"></circle>
+                    <line x1="12" y1="1" x2="12" y2="3"></line>
+                    <line x1="12" y1="21" x2="12" y2="23"></line>
+                    <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+                    <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+                    <line x1="1" y1="12" x2="3" y2="12"></line>
+                    <line x1="21" y1="12" x2="23" y2="12"></line>
+                    <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+                    <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+                </svg>
+            </button>
+        </header>
+
+        <section class="hero">
+            <img src="https://via.placeholder.com/200" alt="Toumeh Mohamed" class="profile-image">
+            <div class="hero-content">
+                <h1>Toumeh Mohamed</h1>
+                <h2>Développeur Web</h2>
+                <div class="contact-info">
+                    <div class="contact-item">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"></path>
+                        </svg>
+                        <span>0649334275</span>
+                    </div>
+                    <div class="contact-item">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path>
+                            <polyline points="22,6 12,13 2,6"></polyline>
+                        </svg>
+                        <span>toaamamohammed@gmail.com</span>
+                    </div>
+                    <div class="contact-item">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path>
+                            <circle cx="12" cy="10" r="3"></circle>
+                        </svg>
+                        <span>Maarif-CasaBlanca</span>
+                    </div>
+                    <div class="contact-item">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"></path>
+                        </svg>
+                        <a href="https://github.com/medtoumeh" target="_blank" rel="noopener noreferrer">GitHub</a>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section>
+            <div class="section-header">
+                <h2>Expériences</h2>
+                <svg class="star-icon" xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="currentColor" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon>
+                </svg>
+            </div>
+            <div class="card">
+                <h3>CEO</h3>
+                <p>Depuis 2023-2024</p>
+                <ul>
+                    <li>Création et gestion mon entreprise de e-commerce avec une équipe de 25 personnes</li>
+                    <li>Gestion de stratégies de marketing digital de l'automisation de ventes</li>
+                </ul>
+            </div>
+        </section>
+
+        <section>
+            <div class="section-header">
+                <h2>Formations</h2>
+                <svg class="star-icon" xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="currentColor" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon>
+                </svg>
+            </div>
+            <div class="card">
+                <h3>École Eurelec</h3>
+                <p>2021 - 2022</p>
+                <p>Diplôme technicien en gestion informatisée</p>
+            </div>
+            <div class="card">
+                <h3>Développement informatique</h3>
+                <p>2024</p>
+            </div>
+        </section>
+
+        <section>
+            <div class="section-header">
+                <h2>Compétences</h2>
+                <svg class="star-icon" xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="currentColor" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon>
+                </svg>
+            </div>
+            <div class="skills-grid">
+                <div class="skill-card">
+                    <p>CEO</p>
+                </div>
+                <div class="skill-card">
+                    <p>Gestion d'équipe</p>
+                </div>
+                <div class="skill-card">
+                    <p>Marketing digital</p>
+                </div>
+                <div class="skill-card">
+                    <p>Gestion plateformes e-commerce</p>
+                </div>
+            </div>
+        </section>
+
+        <section>
+            <div class="section-header">
+                <h2>Langues</h2>
+                <svg class="star-icon" xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="currentColor" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon>
+                </svg>
+            </div>
+            <div class="languages-grid">
+                <div class="card">
+                    <p>Français</p>
+                </div>
+                <div class="card">
+                    <p>Anglais</p>
+                </div>
+                <div class="card">
+                    <p>Arabe</p>
+                </div>
+            </div>
+        </section>
+
+        <section>
+            <div class="section-header">
+                <h2>Loisirs</h2>
+                <svg class="star-icon" xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="currentColor" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon>
+                </svg>
+            </div>
+            <div class="card">
+                <p>Voyage</p>
+            </div>
+        </section>
+    </div>
+
+    <footer>
+        <div class="container">
+            <p>© <span id="current-year"></span> Toumeh Mohamed. Tous droits réservés.</p>
+        </div>
+    </footer>
+
+    <script>
+        // Définir l'année actuelle dans le footer
+        document.getElementById('current-year').textContent = new Date().getFullYear();
+
+        // Gestion du mode sombre/clair
+        const themeToggle = document.querySelector('.theme-toggle');
+        const themeIcon = document.getElementById('theme-icon');
+        
+        // Vérifier si l'utilisateur préfère le mode sombre
+        const prefersDarkMode = window.matchMedia('(prefers-color-scheme: dark)').matches;
+        
+        // Appliquer le mode sombre si préféré
+        if (prefersDarkMode) {
+            document.body.classList.add('dark');
+            updateThemeIcon(true);
+        }
+        
+        // Fonction pour mettre à jour l'icône du thème
+        function updateThemeIcon(isDark) {
+            if (isDark) {
+                themeIcon.innerHTML = `
+                    <circle cx="12" cy="12" r="5"></circle>
+                    <line x1="12" y1="1" x2="12" y2="3"></line>
+                    <line x1="12" y1="21" x2="12" y2="23"></line>
+                    <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+                    <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+                    <line x1="1" y1="12" x2="3" y2="12"></line>
+                    <line x1="21" y1="12" x2="23" y2="12"></line>
+                    <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+                    <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+                `;
+            } else {
+                themeIcon.innerHTML = `
+                    <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
+                `;
+            }
+        }
+        
+        // Basculer entre le mode sombre et clair
+        themeToggle.addEventListener('click', () => {
+            const isDarkMode = document.body.classList.toggle('dark');
+            updateThemeIcon(isDarkMode);
+        });
+
+        // Animation au défilement pour les sections
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.style.opacity = 1;
+                    entry.target.style.transform = 'translateY(0)';
+                }
+            });
+        }, { threshold: 0.1 });
+
+        // Appliquer l'animation à toutes les sections
+        document.querySelectorAll('section').forEach(section => {
+            section.style.opacity = 0;
+            section.style.transform = 'translateY(20px)';
+            section.style.transition = 'opacity 0.5s ease, transform 0.5s ease';
+            observer.observe(section);
+        });
+    </script>
+</body>
+</html>
